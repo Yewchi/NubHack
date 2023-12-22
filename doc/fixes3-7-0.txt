@@ -1,4 +1,4 @@
-$NHDT-Branch: (unknown) $:$NHDT-Revision: 1.1339 $ $NHDT-Date: 1702264272 2023/12/11 03:11:12 $
+$NHDT-Branch: NetHack-3.7 $:$NHDT-Revision: 1.1317 $ $NHDT-Date: 1701500708 2023/12/02 07:05:08 $
 
 General Fixes and Modified Features
 -----------------------------------
@@ -617,7 +617,6 @@ yet another fix for display problems during restore:  if game is saved while
 	being obfuscated by hallucination, but when displaying the hero there
 	instead it would access steed pointer before that has been set up
 resistances gained from worn or wielded items also protect hero's inventory
-dwarvish cloaks somewhat protect hero's inventory from cold and fire
 non-metallic gloves protect worn rings from shock
 message "Oops!  food rations out of your grasp!" occurred due to perm_invent
 	in mid-operation overwriting all of xname's/doname's obufs; fixed by
@@ -1298,43 +1297,8 @@ mimics sometimes woke up and came out of hiding when they shouldn't have if
 Wizards no longer have a bonus to writing unknown spellbooks, but now
 	learn what spellbooks look like as they gain skill in their
 	spell schools (allowing a guaranteed write with enough skill)
-starting inventory: magic markers are more likely (guaranteed for
+Starting inventory: magic markers are more likely (guaranteed for
 	Wizards), but have fewer charges
-early dungeon (pre-Sokoban) generates extra useful survivability items
-potion of healing is much more common, and has a unique price
-alchemy may affect only a portion of the dipped potions if a large
-	stack is dipped (especially if that stack is diluted)
-monster kills can no longer deathdrop comestibles (other than the
-	monster's corpse) unless the monster collects food or
-	generates with food
-about 10% of the heroes will now be left-handed; track the handedness of the
-	hero in the 'you' struct
-if a monster fled from hero by intentionally jumping into a vault teleporter,
-	it would teleport randomly instead of into the vault, and if the
-	teleport trap's niche wasn't mapped yet, the trap would become mapped
-	but the spot would remain a secret corridor and not become accessible
-boomerang travels in a clockwise arc when thrown by a left-handed hero and in
-	a counterclockwise arc when thrown by a right-handed hero
-spellbooks weight 50 units but Book of the Dead only 20, and novels only 1;
-	the Book of the Dead has been changed to 50 and novels to 10
-save and restore hero tracks, increase track length
-change vrock and hezrou from red to green, adjust vrock tile to have green
-change wolf and werewolf to grey, warg to black
-change [master] mind flayer, the Wizard, and the riders to bright magenta
-walking into a shopkeeper tries to pay the bill
-show billed items in a menu when paying with non-traditional menustyle
-prioritize paying shopkeeper next to you even if multiple are detected
-avoid impossible "trapped without a trap (fmon)" from 'sanity_check' when a
-	drum of earthquake made a pit at a monster's spot and pit creation
-	caused adjacent pool/moat/lava to flood that spot; if a non-floater,
-	non-flyer monster survived that, it got marked as trapped even though
-	flooding deleted the trap
-demons cannot be frightened by showing them their reflection
-HP regeneration formula has changed, primarily to be less fast in the endgame
-riding negates stealth unless the steed is flying
-previous hero rising as undead in bones retains intrinsics
-level temperature affects monster generation
-amulet of unchanging cannot be polymorphed
 
 
 Fixes to 3.7.0-x General Problems Exposed Via git Repository
@@ -2413,7 +2377,6 @@ allow the ')', '[', '(', '=', '"', and '*' commands to be preceded by the 'm'
 	prefix to force a menu where the player can pick an item and choose
 	a context-sensitive item action for it; some give a menu even without
 	the prefix and for those, same item selection and action can be used
-hot ground (Gehennom / Plane of Fire) often destroys dropped potions
 
 
 Platform- and/or Interface-Specific New Features
