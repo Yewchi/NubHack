@@ -80,18 +80,18 @@ $(MAKEDEFS)	: ../util/makedefs.c ../include/config.h ../src/mdlib.c \
 		  ../util/mdgrep.h
 	( cd ../util ; make makedefs )
 
-GAME	= nethack
+GAME	= nubhack
 MANDIR	?= /usr/man/man6
 MANEXT	= 6
 NROFF ?= nroff
 
 # manual installation for most BSD-style systems
-GAMEMANCREATE = cat nethack.6 | $(NHGREP) >
+GAMEMANCREATE = cat nubhack.6 | $(NHGREP) >
 RCVRMANCREATE = cat recover.6 | $(NHGREP) >
 DLBMANCREATE = cat dlb.6 | $(NHGREP) >
 MDMANCREATE = cat makedefs.6 | $(NHGREP) >
 # manual installation for most SYSV-style systems
-# GAMEMANCREATE = cat nethack.6 | $(NHGREP) | nroff -man - >
+# GAMEMANCREATE = cat nubhack.6 | $(NHGREP) | nroff -man - >
 # RCVRMANCREATE = cat recover.6 | $(NHGREP) | nroff -man - >
 # DLBMANCREATE = cat dlb.6 | $(NHGREP) | nroff -man - >
 # MDMANCREATE = cat makedefs.6 | $(NHGREP) | nroff -man - >
@@ -125,7 +125,7 @@ MAN2TXT = $(NHGREP) | $(NROFF) -man $(MAN2TXTPRE) $(MAN2TXTPOST)
 # line if you have groff 1.23 or greater.
 #MAN2TXT = $(NHGREP) | groff -man -Tascii -P -cbou
 nethack.txt	: nethack.6
-	cat nethack.6 | $(MAN2TXT) > nethack.txt
+	cat nethack.6 | $(MAN2TXT) > nubhack.txt
 recover.txt	: recover.6
 	cat recover.6 | $(MAN2TXT) > recover.txt
 dlb.txt		: dlb.6

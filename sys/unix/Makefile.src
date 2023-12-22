@@ -162,7 +162,7 @@ SYSOBJ = $(TARGETPFX)ioctl.o $(TARGETPFX)unixmain.o $(TARGETPFX)unixtty.o \
 #CC = mwcc
 #CFLAGS = -r -I../include
 #LINK = mwld
-#LFLAGS = -map nethack.xMAP
+#LFLAGS = -map nubhack.xMAP
 #   on Intel:
 #CFLAGS = -O -I../include
 #LINK = gcc
@@ -226,7 +226,7 @@ REGEXOBJ ?= $(TARGETPFX)posixregex.o
 # config.h.  Note that if you are building for any window system which
 # uses tiles, uncomment '#$(TARGETPFX)tile.o' (by removing the '#') in that
 # system's WINxOBJ (WINX11OBJ or WINQTOBJ or WINQT3OBJ).  If you are building
-# nethack with support for multiple window systems, only uncomment that for
+# nubhack with support for multiple window systems, only uncomment that for
 # one of them to avoid duplicate tile.o.
 #
 # files for a straight tty port using no native windowing system
@@ -256,7 +256,7 @@ WINX11OBJ = $(TARGETPFX)Window.o $(TARGETPFX)dialogs.o $(TARGETPFX)winX.o \
 	$(TARGETPFX)winmisc.o $(TARGETPFX)winstat.o $(TARGETPFX)wintext.o \
 	$(TARGETPFX)winval.o #$(TARGETPFX)tile.o
 #
-# Files for a Qt 3 interface (renamed since nethack 3.6.x)
+# Files for a Qt 3 interface (renamed since nubhack 3.6.x)
 #
 #WINQT3SRC = ../win/Qt3/qt3_win.cpp ../win/Qt3/qt3_clust.cpp \
 #	../win/Qt3/qt3tableview.cpp
@@ -402,8 +402,8 @@ WINCURSESLIB = -lncurses
 # LIBS =
 
 # make NetHack
-GAME     = nethack
-# GAME     = nethack.prg
+GAME     = nubhack
+# GAME     = nubhack.prg
 GAMEBIN = $(GAME)
 
 # if you defined RANDOM in unixconf.h since your system did not come
@@ -419,7 +419,7 @@ AWK	= awk
 # changing this to 0 will change the behavior to only make that file if
 # it doesn't already exist; to skip it completely, create an empty file
 # of that name and also set this to 0; there shouldn't be any need to
-# skip it--if nethack's sources don't reside in a git repository than
+# skip it--if nubhack's sources don't reside in a git repository than
 # the script which creates that file will fail benignly and 'makedefs -v'
 # will proceed without it
 GITINFO=1
@@ -656,7 +656,7 @@ SysBe: $(HOSTOBJ) $(HOBJ) $(DATE_O) $(BUILDMORE) Makefile
 	@echo "Linking $(GAME)."
 	$(AT)$(TARGET_LINK) $(TARGET_LFLAGS) -o $(GAME) \
 		$(HOBJ) $(DATE_O) $(WINLIB) $(TARGET_LIBS) $(LUALIBS)
-	@xres -o $(GAME) ../win/BeOS/nethack.rsrc
+	@xres -o $(GAME) ../win/BeOS/nubhack.rsrc
 	@mimeset -f $(GAME)
 	@touch SysBe
 

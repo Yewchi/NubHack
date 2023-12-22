@@ -329,7 +329,7 @@ ifdef WANT_SHARE_INSTALL
 ifeq ($(GAMEUID),root)
 PREFIX:=/Library/NetHack
 SHELLDIR=/usr/local/bin
-HACKDIR=$(PREFIX)/nethackdir
+HACKDIR=$(PREFIX)/nubhackdir
 CHOWN=chown
 CHGRP=chgrp
 # We run sgid so the game has access to both HACKDIR and user preferences.
@@ -337,7 +337,7 @@ GAMEPERM = 02755
 else	# ! root
 PREFIX:=/Users/$(GAMEUID)
 SHELLDIR=$(PREFIX)/bin
-HACKDIR=$(PREFIX)/Library/NetHack/nethackdir
+HACKDIR=$(PREFIX)/Library/NetHack/nubhackdir
 CHOWN=/usr/bin/true
 CHGRP=/usr/bin/true
 GAMEPERM = 0500
@@ -388,7 +388,7 @@ else	# !WANT_SOURCE_INSTALL
 #endif
 PREFIX:=$(wildcard ~)
 SHELLDIR=$(PREFIX)/bin
-HACKDIR=$(PREFIX)/nethackdir
+HACKDIR=$(PREFIX)/nubhackdir
 CHOWN=/usr/bin/true
 CHGRP=/usr/bin/true
 GAMEPERM = 0700
@@ -397,7 +397,7 @@ VARDIRPERM = 0700
 
 ifdef ($(WANT_DEFAULT),X11)
 # install nethack.rc as ~/.nethackrc if no ~/.nethackrc exists
-PREINSTALL+= cp -n win/X11/nethack.rc ~/.nethackrc || true;
+PREINSTALL+= cp -n win/X11/nethack.rc ~/.nubhackrc || true;
 endif	# WANT_DEFAULT X11
 
 PREINSTALL+= (mkdir $(SHELLDIR) || true);
@@ -587,7 +587,7 @@ $(BUNDLE_SHAREDFRAMEWORKSDIR): $(BUNDLE_CONTENTSDIR)
 		mkdir -p $@
 
 $(BUNDLE_GAME): nethack
-	cp nethack $@
+	cp nubhack $@
 
 #FIXME: replace hardcoded information with actual values derived from NetHack build
 $(BUNDLE_INFOPLIST):
@@ -604,7 +604,7 @@ $(BUNDLE_INFOPLIST):
 	@echo '<key>CFBundleGetInfoString</key>' >>$@
 	@echo '<string>$(BUNDLE_GAMENAME) 3.7 for MacOS</string>' >>$@
 	@echo '<key>CFBundleIdentifier</key>' >>$@
-	@echo '<string>org.nethack.macos</string>' >>$@
+	@echo '<string>org.nubhack.macos</string>' >>$@
 	@echo '<key>CFBundleExecutable</key>' >>$@
 	@echo '<string>$(BUNDLE_NAME)</string>' >>$@
 	@echo '<key>CFBundleIconFile</key>' >>$@
@@ -735,7 +735,7 @@ else
 		 win/macosx/NetHackGuidebook.applescript
 
 	mkdir -p PKG
-	pkgbuild --root PKGROOT --identifier org.nethack.term --scripts PKGSCRIPTS PKG/NH-Term.pkg
+	pkgbuild --root PKGROOT --identifier org.nubhack.term --scripts PKGSCRIPTS PKG/NH-Term.pkg
 	productbuild --synthesize --product Info.plist --package PKG/NH-Term.pkg Distribution.xml
 	productbuild --distribution Distribution.xml --resources RESOURCES --package-path PKG NetHack-$(SVS)-mac-Term-unsigned.pkg
 ifeq ($(DEVELOPER_CERT),NONE)
@@ -757,10 +757,10 @@ build_package_root:
 	cd src/..       # make sure we are at TOP
 	rm -rf PKGROOT
 	mkdir -p $(PKGROOT_UG)/lib $(PKGROOT_BIN) $(PKGROOT_UG)/man/man6 $(PKGROOT_UG)/doc $(PKGROOT_UGLN)
-	install -p src/nethack $(PKGROOT_BIN)
+	install -p src/nubhack $(PKGROOT_BIN)
 	# XXX should this be called nethackrecover?
 	install -p util/recover $(PKGROOT_BIN)
-	install -p doc/nethack.6 $(PKGROOT_UG)/man/man6
+	install -p doc/nubhack.6 $(PKGROOT_UG)/man/man6
 	install -p doc/recover.6 $(PKGROOT_UG)/man/man6
 	install -p doc/Guidebook $(PKGROOT_UG)/doc
 	install -p dat/nhdat $(PKGROOT_UGLN)
@@ -779,8 +779,8 @@ build_package_root:
 	echo $(CHOWN) $(GAMEUID) $(HACKDIR)/*        >> PKGSCRIPTS/postinstall
 	echo $(CHGRP) $(GAMEGRP) $(HACKDIR)        >> PKGSCRIPTS/postinstall
 	echo $(CHGRP) $(GAMEGRP) $(HACKDIR)/*        >> PKGSCRIPTS/postinstall
-	echo $(CHOWN) $(GAMEUID) $(SHELLDIR)/nethack  >> PKGSCRIPTS/postinstall
-	echo $(CHGRP) $(GAMEGRP) $(SHELLDIR)/nethack  >> PKGSCRIPTS/postinstall
+	echo $(CHOWN) $(GAMEUID) $(SHELLDIR)/nubhack  >> PKGSCRIPTS/postinstall
+	echo $(CHGRP) $(GAMEGRP) $(SHELLDIR)/nubhack  >> PKGSCRIPTS/postinstall
 	echo $(CHOWN) $(GAMEUID) $(SHELLDIR)/recover  >> PKGSCRIPTS/postinstall
 	echo $(CHGRP) $(GAMEGRP) $(SHELLDIR)/recover  >> PKGSCRIPTS/postinstall
 	echo chmod $(VARDIRPERM)  $(HACKDIR)          >> PKGSCRIPTS/postinstall
@@ -794,7 +794,7 @@ build_package_root:
 	echo chmod $(VARFILEPERM) $(HACKDIR)/xlogfile >> PKGSCRIPTS/postinstall
 	echo chmod $(VARFILEPERM) $(HACKDIR)/livelog  >> PKGSCRIPTS/postinstall
 	echo chmod $(VARFILEPERM) $(HACKDIR)/sysconf  >> PKGSCRIPTS/postinstall
-	echo chmod $(GAMEPERM)   $(SHELLDIR)/nethack  >> PKGSCRIPTS/postinstall
+	echo chmod $(GAMEPERM)   $(SHELLDIR)/nubhack  >> PKGSCRIPTS/postinstall
 	echo chmod $(EXEPERM)    $(SHELLDIR)/recover  >> PKGSCRIPTS/postinstall
 	chmod 0775 PKGSCRIPTS/postinstall
 
@@ -810,21 +810,21 @@ ifneq (,$(WANT_WIN_X11)$(WANT_WIN_TTY))
 else
 	$(MAKE) build_package_root
 	rm -rf NetHackQt
-	mkdir -p NetHackQt/NetHackQt.app/nethackdir/save
+	mkdir -p NetHackQt/NetHackQt.app/nubhackdir/save
 	mkdir NetHackQt/Documentation
-	cp doc/Guidebook.txt doc/nethack.txt doc/recover.txt NetHackQt/Documentation
+	cp doc/Guidebook.txt doc/nubhack.txt doc/recover.txt NetHackQt/Documentation
 
-	osacompile -o NetHackQt/NetHackQt.app/nethackdir/NetHackRecover.app \
+	osacompile -o NetHackQt/NetHackQt.app/nubhackdir/NetHackRecover.app \
 		 win/macosx/NetHackRecover.applescript
-	cp win/macosx/recover.pl NetHackQt/NetHackQt.app/nethackdir
+	cp win/macosx/recover.pl NetHackQt/NetHackQt.app/nubhackdir
 
 	mkdir -p NetHackQt/NetHackQt.app/Contents/Frameworks
 	cp $(QTDIR)/libqt-mt.3.dylib NetHackQt/NetHackQt.app/Contents/Frameworks
 
 	mkdir NetHackQt/NetHackQt.app/Contents/MacOS
-	mv PKGROOT/nethack NetHackQt/NetHackQt.app/Contents/MacOS
+	mv PKGROOT/nubhack NetHackQt/NetHackQt.app/Contents/MacOS
 
-	mv PKGROOT/lib/nethackdir NetHackQt/NetHackQt.app/nethackdir
+	mv PKGROOT/lib/nubhackdir NetHackQt/NetHackQt.app/nubhackdir
 
 # XXX still missing:
 #NetHackQt/NetHackQt.app

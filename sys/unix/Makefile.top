@@ -22,9 +22,9 @@ NHSROOT=.
 
 #	make NetHack (as opposite to variants or such)
 #PREFIX	 = /usr
-GAME     = nethack
-# GAME     = nethack.exe
-# GAME     = nethack.prg
+GAME     = nubhack
+# GAME     = nubhack.exe
+# GAME     = nubhack.prg
 #GAMEUID  = games
 #GAMEGRP  = bin
 
@@ -278,8 +278,8 @@ dofiles:
 	cp util/recover $(INSTDIR)
 	-if test -n '$(SHELLDIR)'; then rm -f $(SHELLDIR)/$(GAME); fi
 	if test -n '$(SHELLDIR)'; then \
-		sed -e 's;/usr/games/lib/nethackdir;$(HACKDIR);' \
-		-e 's;HACKDIR/nethack;HACKDIR/$(GAME);' \
+		sed -e 's;/usr/games/lib/nubhackdir;$(HACKDIR);' \
+		-e 's;HACKDIR/nubhack;HACKDIR/$(GAME);' \
 		< sys/unix/nethack.sh \
 		> $(SHELLDIR)/$(GAME) ; fi
 # set up their permissions
