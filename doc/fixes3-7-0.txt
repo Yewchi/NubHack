@@ -512,8 +512,6 @@ any blessed key was behaving as if was the rogue's Master Key when unlocking
 when an unseen non-pet picks up or uses an item, hero loses known/dknown/
 	bknown/cknown/lknown memory of that item (so becomes unidentified; in
 	particular, player won't be asked what to call unseen thrown potion)
-when picking up a stackable item, it can be identified by comparing it to
-        another identical item that is already identified
 wishing for a partly eaten wraith corpse yielded "partly eaten food (1) more
 	nutritious than untouched food (0)"
 if PREFIXES_IN_USE was defined (and VAR_PLAYGROUND forces it to be) when
@@ -1293,12 +1291,7 @@ if hero destroys a shop wall by breaking a wand of digging or applying a drum
 	of earthquake, have shopkeeper demand payment
 mimics sometimes woke up and came out of hiding when they shouldn't have if
 	hero without protection from shape changers returned to a previously
-	visited level (though they would usually rehide so it wasn't obvious)
-Wizards no longer have a bonus to writing unknown spellbooks, but now
-	learn what spellbooks look like as they gain skill in their
-	spell schools (allowing a guaranteed write with enough skill)
-Starting inventory: magic markers are more likely (guaranteed for
-	Wizards), but have fewer charges
+	visitied level (though they would usually rehide so it wasn't obvious)
 
 
 Fixes to 3.7.0-x General Problems Exposed Via git Repository

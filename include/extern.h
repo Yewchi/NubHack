@@ -2900,7 +2900,6 @@ extern int known_spell(short);
 extern int spell_idx(short);
 extern char force_learn_spell(short);
 extern int num_spells(void);
-extern void skill_based_spellbook_id(void);
 
 /* ### steal.c ### */
 
