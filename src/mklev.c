@@ -23,7 +23,9 @@ void clear_level_structures(void);
 static void fill_ordinary_room(struct mkroom *);
 static void makelevel(void);
 static boolean bydoor(coordxy, coordxy);
+#if 0
 static void mktrap_victim(struct trap *);
+#endif
 static struct mkroom *find_branch_room(coord *) NONNULLARG1;
 static struct mkroom *pos_to_room(coordxy, coordxy);
 static boolean cardinal_nextto_room(struct mkroom *, coordxy, coordxy);
@@ -1456,6 +1458,7 @@ occupied(coordxy x, coordxy y)
                       || invocation_pos(x, y));
 }
 
+#if 0
 /* generate a corpse and some items on top of a trap */
 static void
 mktrap_victim(struct trap *ttmp)
@@ -1571,6 +1574,7 @@ mktrap_victim(struct trap *ttmp)
     if (otmp)
         otmp->age -= (TAINT_AGE + 1); /* died too long ago to eat */
 }
+#endif
 
 /* make a trap somewhere (in croom if mazeflag = 0 && !tm) */
 /* if tm != null, make trap at that location */
@@ -1620,6 +1624,7 @@ mktrap(
         /* bias the frequency of fire traps in Gehennom */
         kind = FIRE_TRAP;
     } else {
+
         do {
             kind = rnd(TRAPNUM - 1);
             /* reject "too hard" traps */
@@ -1707,44 +1712,6 @@ mktrap(
 
     if (kind == WEB && !(mktrapflags & MKTRAP_NOSPIDERONWEB))
         (void) makemon(&mons[PM_GIANT_SPIDER], m.x, m.y, NO_MM_FLAGS);
-    if (t && (mktrapflags & MKTRAP_SEEN))
-        t->tseen = TRUE;
-    if (kind == MAGIC_PORTAL && (u.ucamefrom.dnum || u.ucamefrom.dlevel)) {
-        assign_level(&t->dst, &u.ucamefrom);
-    }
-
-    /* The hero isn't the only person who's entered the dungeon in
-       search of treasure. On the very shallowest levels, there's a
-       chance that a created trap will have killed something already
-       (and this is guaranteed on the first level).
-
-       This isn't meant to give any meaningful treasure (in fact, any
-       items we drop here are typically cursed, other than ammo fired
-       by the trap). Rather, it's mostly just for flavour and to give
-       players on very early levels a sufficient chance to avoid traps
-       that may end up killing them before they have a fair chance to
-       build max HP. Including cursed items gives the same fair chance
-       to the starting pet, and fits the rule that possessions of the
-       dead are normally cursed.
-
-       Some types of traps are excluded because they're entirely
-       nonlethal, even indirectly. We also exclude all of the
-       later/fancier traps because they tend to have special
-       considerations (e.g. webs, portals), often are indirectly
-       lethal, and tend not to generate on shallower levels anyway.
-       Finally, pits are excluded because it's weird to see an item
-       in a pit and yet not be able to identify that the pit is there. */
-    if (kind != NO_TRAP && !(mktrapflags & MKTRAP_NOVICTIM)
-        && lvl <= (unsigned) rnd(4)
-        && kind != SQKY_BOARD && kind != RUST_TRAP
-        /* rolling boulder trap might not have a boulder if there was no
-           viable path (such as when placed in the corner of a room), in
-           which case tx,ty==launch.x,y; no boulder => no dead predecessor */
-        && !(kind == ROLLING_BOULDER_TRAP
-             && t->launch.x == t->tx && t->launch.y == t->ty)
-        && !is_pit(kind) && kind < HOLE) {
-        mktrap_victim(t);
-    }
 }
 
 /* Create stairs up or down at x,y.
