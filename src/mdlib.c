@@ -392,7 +392,7 @@ version_id_string(char *outbuf, size_t bufsz, const char *build_date)
     Strcpy(&subbuf[1], PORT_SUB_ID);
 #endif
 
-    Snprintf(outbuf, bufsz, "%s NetHack%s Version %s%s - last %s %s.", PORT_ID,
+    Snprintf(outbuf, bufsz, "%s NubHack%s Version %s%s - last %s %s.", PORT_ID,
             subbuf, mdlib_version_string(versbuf, "."), statusbuf,
             date_via_env ? "revision" : "build", build_date);
     return outbuf;
@@ -774,7 +774,7 @@ build_options(void)
 #else
 #define STATUS_ARG ""
 #endif /* NH_DEVEL_STATUS == NH_STATUS_RELEASED */
-    Sprintf(optbuf, "%sNetHack version %d.%d.%d%s\n",
+    Sprintf(optbuf, "%sNubHack version %d.%d.%d%s\n",
             opt_indent, VERSION_MAJOR, VERSION_MINOR, PATCHLEVEL, STATUS_ARG);
     STOREOPTTEXT(optbuf);
     Sprintf(optbuf, "Options compiled into this edition:");

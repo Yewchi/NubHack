@@ -2607,6 +2607,9 @@ docontact(void)
     putstr(cwin, 0, "For more information on NetHack, or to report a bug,");
     Sprintf(buf, "visit our website \"%s\".", DEVTEAM_URL);
     putstr(cwin, 0, buf);
+    putstr(cwin, 0, "");
+    Sprintf(buf, "NubHack distributed via https://github.com/yewchi/NubHack");
+    putstr(cwin, 0, buf);
     display_nhwindow(cwin, FALSE);
     destroy_nhwindow(cwin);
 }
