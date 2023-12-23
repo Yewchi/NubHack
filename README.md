@@ -1,5 +1,7 @@
 ## NubHack - 3.7 But harder
 
+_This is not a real variant and the name is free_
+
 I love NetHack, it's one of the best video games ever made. And I love 3.7.
 
 But it's too easy for me to enjoy (I'm spoilerless noob).
