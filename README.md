@@ -4,7 +4,7 @@ _This is not a real variant and the name is free_
 
 ### Compat
 
-build env is made for linux install, and coexisting with offical NetHack with a safe `make install`. Compiles exe @ src/nubhack.
+build env is made for linux install, and coexisting with offical NetHack with a safe `make install` using **sys/unix/hints/linux.370**. Compiles exe @ src/nubhack.
 
 It might build for Mac, but I can't guarentee it won't overwrite your NH 3.7 save file, or work at all, or not install to the wrong folder, or not have broken config paths.
 
